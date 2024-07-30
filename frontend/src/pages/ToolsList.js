@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
-import ToolCard from "./ToolCard"
-import ToolForm from "./ToolForm"
+import ToolCard from "../components/ToolCard"
+import ToolForm from "../components/ToolForm"
 
 const ToolsList = () => {
   const [tools, setTools] = useState([])
