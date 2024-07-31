@@ -31,7 +31,7 @@ const Customers = () => {
     fetch("http://localhost:9292/customers", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(customerData),
+      body: JSON.stringify({ ...customerData, current_amount_owed: 0 }),
     })
       .then((response) => response.json())
       .then((newCustomer) => {

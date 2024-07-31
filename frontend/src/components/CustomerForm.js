@@ -7,7 +7,6 @@ const CustomerForm = ({ customer, onSave, onCancel }) => {
     age: "",
     phone_number: "",
     email_address: "",
-    amount_owed: 0,
   })
 
   useEffect(() => {
