@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import CustomerForm from "../components/CustomerForm"
+import CustomerTable from "../components/CustomerTable"
 
 const Customers = () => {
   const [customers, setCustomers] = useState([])
@@ -68,37 +69,11 @@ const Customers = () => {
           onCancel={handleCancel}
         />
       )}
-      <table>
-        <thead>
-          <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Age</th>
-            <th>Phone Number</th>
-            <th>Email Address</th>
-            <th>Amount Owed</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {customers.map((customer) => (
-            <tr key={customer.id}>
-              <td>{customer.first_name}</td>
-              <td>{customer.last_name}</td>
-              <td>{customer.age}</td>
-              <td>{customer.phone_number}</td>
-              <td>{customer.email_address}</td>
-              <td>{customer.current_amount_owed}</td>
-              <td>
-                <button onClick={() => handleEdit(customer)}>Edit</button>
-                <button onClick={() => handleDelete(customer.id)}>
-                  Delete
-                </button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <CustomerTable
+        customers={customers}
+        onEdit={handleEdit}
+        onDelete={handleDelete}
+      />
     </div>
   )
 }
