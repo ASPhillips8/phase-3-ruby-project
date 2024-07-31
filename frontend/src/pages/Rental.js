@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react"
 import RentalTable from "../components/RentalTable"
 import RentalForm from "../components/RentalForm"
+import EditRentalForm from "../components/EditRentalForm"
 
 const Rental = () => {
   const [rentals, setRentals] = useState([])
   const [customers, setCustomers] = useState([])
   const [tools, setTools] = useState([])
   const [isFormVisible, setFormVisible] = useState(false)
+  const [isEditFormVisible, setEditFormVisible] = useState(false)
+  const [currentRental, setCurrentRental] = useState(null)
 
   useEffect(() => {
     fetch("http://localhost:9292/rentals")
@@ -30,11 +33,38 @@ const Rental = () => {
       .then((savedRental) => {
         console.log(savedRental)
         setRentals((prevRentals) => [...prevRentals, savedRental])
+        setTools((prevTools) =>
+          prevTools.filter((tool) => tool.id !== savedRental.tool.id)
+        )
         setFormVisible(false)
       })
   }
 
-  console.log(rentals)
+  const handleUpdate = (updatedRental) => {
+    fetch(`http://localhost:9292/rentals/${updatedRental.id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        date_out: updatedRental.date_out,
+        date_in: updatedRental.date_in,
+      }),
+    })
+      .then((response) => response.json())
+      .then((updatedRental) => {
+        setRentals((prevRentals) =>
+          prevRentals.map((rental) =>
+            rental.id === updatedRental.id ? updatedRental : rental
+          )
+        )
+        setEditFormVisible(false)
+        setCurrentRental(null)
+      })
+      .catch((error) => {
+        console.error("Error:", error)
+      })
+  }
 
   const handleDelete = (id) => {
     fetch(`http://localhost:9292/rentals/${id}`, {
@@ -53,6 +83,13 @@ const Rental = () => {
 
   const handleCancel = () => {
     setFormVisible(false)
+    setEditFormVisible(false)
+    setCurrentRental(null)
+  }
+
+  const handleEditClick = (rental) => {
+    setCurrentRental(rental)
+    setEditFormVisible(true)
   }
 
   return (
@@ -67,7 +104,18 @@ const Rental = () => {
           customers={customers}
         />
       )}
-      <RentalTable rentals={rentals} onDelete={handleDelete} />
+      {isEditFormVisible && currentRental && (
+        <EditRentalForm
+          rental={currentRental}
+          onUpdate={handleUpdate}
+          onCancel={handleCancel}
+        />
+      )}
+      <RentalTable
+        rentals={rentals}
+        onDelete={handleDelete}
+        onUpdate={handleEditClick}
+      />
     </div>
   )
 }

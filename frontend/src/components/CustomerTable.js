@@ -10,7 +10,6 @@ const CustomerTable = ({ customers, onEdit, onDelete }) => {
           <th>Age</th>
           <th>Phone Number</th>
           <th>Email Address</th>
-          {/* <th>Amount Owed</th> */}
           <th>Actions</th>
         </tr>
       </thead>
@@ -22,7 +21,6 @@ const CustomerTable = ({ customers, onEdit, onDelete }) => {
             <td>{customer.age}</td>
             <td>{customer.phone_number}</td>
             <td>{customer.email_address}</td>
-            {/* <td>{customer.current_amount_owed}</td> */}
             <td>
               <button onClick={() => onEdit(customer)}>Edit</button>
               <button onClick={() => onDelete(customer.id)}>Delete</button>

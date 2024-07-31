@@ -101,22 +101,26 @@ class ApplicationController < Sinatra::Base
       date_out: params[:date_out],
       date_in: params[:date_in]
     )
+    tool = Tool.find(params[:tool_id])
+    tool.rent
     rental.to_json(include: {
                      customer: { methods: :full_name,
                                  only: %i[id first_name
-                                          last_name], }, tool: { only: %i[id name] },
+                                          last_name], }, tool: { methods: :rent, only: %i[id name] },
                    })
   end
 
   patch "/rentals/:id" do
     rental = Rental.find(params[:id])
     rental.update(
-      customer_id: parmas[:customer_id],
-      tool_id: params[:tool_id],
       date_out: params[:date_out],
       date_in: params[:date_in]
     )
-
+    rental.to_json(include: {
+                     customer: { methods: :full_name,
+                                 only: %i[id first_name
+                                          last_name], }, tool: { methods: :rent, only: %i[id name] },
+                   })
     # customer = rental.customer
     # customer.update(current_amount_owed: customer.amount_owed) if rental.date_in
 

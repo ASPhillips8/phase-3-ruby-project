@@ -28,9 +28,6 @@ const Customers = () => {
       )
   }
 
-  /// so above code creates new customer
-  /// and when hit edit it auto pops the fields
-  /// need to figure out the post of this ... conditional
   const handleSave = (customerData) => {
     const url = currentCustomer
       ? `http://localhost:9292/customers/${currentCustomer.id}`
