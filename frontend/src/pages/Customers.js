@@ -28,22 +28,6 @@ const Customers = () => {
       )
   }
 
-  // const handleSave = (customerData) => {
-  //   fetch("http://localhost:9292/customers", {
-  //     method: "POST",
-  //     headers: { "Content-Type": "application/json" },
-  //     body: JSON.stringify({ ...customerData, current_amount_owed: 0 }),
-  //   })
-  //     .then((response) => response.json())
-  //     .then((newCustomer) => {
-  //       setCustomers([...customers, newCustomer])
-  //       setFormVisible(false)
-  //       setCurrentCustomer(null)
-  //     })
-  //     .catch((error) =>
-  //       console.error("There was an error saving the customer!", error)
-  //     )
-  // }
   /// so above code creates new customer
   /// and when hit edit it auto pops the fields
   /// need to figure out the post of this ... conditional
@@ -52,14 +36,11 @@ const Customers = () => {
       ? `http://localhost:9292/customers/${currentCustomer.id}`
       : "http://localhost:9292/customers"
     const method = currentCustomer ? "PATCH" : "POST"
-    const dataToSend = currentCustomer
-      ? customerData
-      : { ...customerData, current_amount_owed: 0 }
 
     fetch(url, {
       method: method,
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(dataToSend),
+      body: JSON.stringify(customerData),
     })
       .then((response) => response.json())
       .then((savedCustomer) => {
