@@ -1,6 +1,6 @@
 import React from "react"
 
-const RentalTable = ({ rentals, onEdit, onDelete }) => {
+const RentalTable = ({ rentals, onUpdate, onDelete }) => {
   return (
     <table>
       <thead>
@@ -21,7 +21,7 @@ const RentalTable = ({ rentals, onEdit, onDelete }) => {
               {rental.customer_id} - {rental.customer.full_name}
             </td>
             <td>
-              <button onClick={() => onEdit(rental)}>Edit</button>
+              <button onClick={() => onUpdate(rental)}>Edit</button>
               <button onClick={() => onDelete(rental.id)}>Delete</button>
             </td>
           </tr>
