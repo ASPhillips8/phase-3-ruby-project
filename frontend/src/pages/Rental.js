@@ -30,11 +30,12 @@ const Rental = () => {
       .then((savedRental) => {
         console.log(savedRental)
         setRentals((prevRentals) => [...prevRentals, savedRental])
+        setTools((prevTools) =>
+          prevTools.filter((tool) => tool.id !== savedRental.tool.id)
+        )
         setFormVisible(false)
       })
   }
-
-  console.log(rentals)
 
   const handleDelete = (id) => {
     fetch(`http://localhost:9292/rentals/${id}`, {
