@@ -16,6 +16,12 @@ class ApplicationController < Sinatra::Base
     tools.to_json
   end
 
+  get "/available_tools" do
+    content_type :json
+    tools = Tool.where(availability: true)
+    tools.to_json
+  end
+
   get "/tools/:id" do
     tool = Tool.find(params[:id])
     tool.to_json
@@ -78,7 +84,11 @@ class ApplicationController < Sinatra::Base
 
   get "/rentals" do
     rentals = Rental.all
-    rentals.to_json
+    rentals.to_json(include: {
+                      customer: { methods: :full_name,
+                                  only: %i[id first_name
+                                           last_name], }, tool: { only: %i[id name] },
+                    })
   end
 
   get "/rentals/:id" do
@@ -93,7 +103,11 @@ class ApplicationController < Sinatra::Base
       date_out: params[:date_out],
       date_in: params[:date_in]
     )
-    rental.to_json(include: %i[customer tool])
+    rental.to_json(include: {
+                     customer: { methods: :full_name,
+                                 only: %i[id first_name
+                                          last_name], }, tool: { only: %i[id name] },
+                   })
   end
 
   patch "/rentals/:id" do

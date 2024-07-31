@@ -2,6 +2,10 @@ class Customer < ActiveRecord::Base
   has_many :rentals
   has_many :tools, through: :rentals
 
+  def full_name
+    "#{first_name} #{last_name}"
+  end
+
   # def amount_owed
   #   rentals.sum do |rental|
   #     rental_end_date = rental.date_in
