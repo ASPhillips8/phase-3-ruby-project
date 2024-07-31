@@ -4,12 +4,18 @@ import RentalForm from "../components/RentalForm"
 
 const Rental = () => {
   const [rentals, setRentals] = useState([])
+  const [customers, setCustomers] = useState([])
+  const [tools, setTools] = useState([])
   const [isFormVisible, setFormVisible] = useState(false)
 
   useEffect(() => {
     fetch("http://localhost:9292/rentals")
       .then((response) => response.json())
-      .then((rentalData) => setRentals(rentalData))
+      .then((data) => {
+        setRentals(data.rentals)
+        setCustomers(data.customers)
+        setTools(data.tools)
+      })
   }, [])
 
   const handleSave = (newRental) => {
@@ -54,7 +60,12 @@ const Rental = () => {
       <h1>Current Rentals</h1>
       <button onClick={() => setFormVisible(true)}>Add Rental</button>
       {isFormVisible && (
-        <RentalForm onSave={handleSave} onCancel={handleCancel} />
+        <RentalForm
+          onSave={handleSave}
+          onCancel={handleCancel}
+          tools={tools}
+          customers={customers}
+        />
       )}
       <RentalTable rentals={rentals} onDelete={handleDelete} />
     </div>

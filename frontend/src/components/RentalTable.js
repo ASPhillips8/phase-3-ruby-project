@@ -15,10 +15,10 @@ const RentalTable = ({ rentals, onEdit, onDelete }) => {
         {rentals.map((rental) => (
           <tr key={rental.id}>
             <td>
-              {rental.tool.id} - {rental.tool.name}
+              {rental.tool_id} - {rental.tool.name}
             </td>
             <td>
-              {rental.customer.id} - {rental.customer.full_name}
+              {rental.customer_id} - {rental.customer.full_name}
             </td>
             <td>
               <button onClick={() => onEdit(rental)}>Edit</button>

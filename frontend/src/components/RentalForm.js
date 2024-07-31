@@ -1,21 +1,9 @@
 import React, { useState, useEffect } from "react"
 
-const RentalForm = ({ onSave, onCancel }) => {
-  const [tools, setTools] = useState([])
-  const [customers, setCustomers] = useState([])
+const RentalForm = ({ onSave, onCancel, tools, customers }) => {
   const [selectedTool, setSelectedTool] = useState("")
   const [selectedCustomer, setSelectedCustomer] = useState("")
   const [dateOut, setDateOut] = useState("")
-
-  useEffect(() => {
-    fetch("http://localhost:9292/available_tools")
-      .then((response) => response.json())
-      .then((toolData) => setTools(toolData))
-
-    fetch("http://localhost:9292/customers")
-      .then((response) => response.json())
-      .then((customerData) => setCustomers(customerData))
-  }, [])
 
   const handleSubmit = (e) => {
     e.preventDefault()
