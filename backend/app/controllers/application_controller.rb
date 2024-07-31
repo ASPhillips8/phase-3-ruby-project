@@ -50,7 +50,7 @@ class ApplicationController < Sinatra::Base
       age: params[:age],
       phone_number: params[:phone_number],
       email_address: params[:email_address],
-      current_amount_owed: params[:current_amount_owed]
+      current_amount_owed: params[:current_amount_owed] || 0.0
     )
     customer.to_json
   end
@@ -93,7 +93,7 @@ class ApplicationController < Sinatra::Base
       date_out: params[:date_out],
       date_in: params[:date_in]
     )
-    rental.to_json
+    rental.to_json(include: %i[customer tool])
   end
 
   patch "/rentals/:id" do
