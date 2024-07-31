@@ -50,7 +50,7 @@ class ApplicationController < Sinatra::Base
       age: params[:age],
       phone_number: params[:phone_number],
       email_address: params[:email_address],
-      current_amount_owed: params[:current_amount_owed]
+      current_amount_owed: params[:current_amount_owed] || 0.0
     )
     customer.to_json
   end
@@ -77,8 +77,16 @@ class ApplicationController < Sinatra::Base
   # renteral controllers
 
   get "/rentals" do
-    rentals = Rental.all
-    rentals.to_json
+    rentals = Rental.all.to_json(include: {
+                                   customer: { methods: :full_name,
+                                               only: %i[id first_name last_name], },
+                                   tool: { only: %i[id name] },
+                                 })
+    customers = Customer.all
+    tools = Tool.available
+    { rentals: JSON.parse(rentals),
+      customers: customers,
+      tools: tools, }.to_json
   end
 
   get "/rentals/:id" do
@@ -93,7 +101,11 @@ class ApplicationController < Sinatra::Base
       date_out: params[:date_out],
       date_in: params[:date_in]
     )
-    rental.to_json
+    rental.to_json(include: {
+                     customer: { methods: :full_name,
+                                 only: %i[id first_name
+                                          last_name], }, tool: { only: %i[id name] },
+                   })
   end
 
   patch "/rentals/:id" do
