@@ -101,10 +101,12 @@ class ApplicationController < Sinatra::Base
       date_out: params[:date_out],
       date_in: params[:date_in]
     )
+    tool = Tool.find(params[:tool_id])
+    tool.rent
     rental.to_json(include: {
                      customer: { methods: :full_name,
                                  only: %i[id first_name
-                                          last_name], }, tool: { only: %i[id name] },
+                                          last_name], }, tool: { methods: :rent, only: %i[id name] },
                    })
   end
 

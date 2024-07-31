@@ -5,4 +5,12 @@ class Tool < ActiveRecord::Base
   def self.available
     all.where(availability: true)
   end
+
+  def rent
+    update(availability: false)
+  end
+
+  def return
+    update(availability: true)
+  end
 end
