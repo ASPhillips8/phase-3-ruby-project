@@ -10,7 +10,7 @@ class Tool < ActiveRecord::Base
     update(availability: false)
   end
 
-  def return
+  def return_back
     update(availability: true)
   end
 end
