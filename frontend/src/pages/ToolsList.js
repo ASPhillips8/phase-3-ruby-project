@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
 import ToolCard from "../components/ToolCard"
 import ToolForm from "../components/ToolForm"
+import "bootstrap/dist/css/bootstrap.min.css"
 
 const ToolsList = () => {
   const [tools, setTools] = useState([])
@@ -28,26 +29,39 @@ const ToolsList = () => {
   }
 
   return (
-    <div>
-      <h1>Tools</h1>
-      <label>
-        Sort by:
-        <select value={sort} onChange={handleSortChange}>
-          <option value="name">Name</option>
-          <option value="available">Available</option>
-          <option value="category">Tool Category</option>
-        </select>
-      </label>
+    <div className="container mt-4">
+      <div className="d-flex justify-content-between align-items-center mb-4">
+        <h1 className="text-center w-100">Tools</h1>
+        <div className="d-flex align-items-center">
+          <label className="mr-2">Sort by:</label>
+          <select
+            className="form-control"
+            value={sort}
+            onChange={handleSortChange}
+          >
+            <option value="name">Name</option>
+            <option value="available">Available</option>
+            <option value="category">Tool Category</option>
+          </select>
+        </div>
+      </div>
 
-      <button onClick={() => setShowForm(!showForm)}>
-        {showForm ? "Close Form" : "Add Tool"}
-      </button>
+      <div className="text-center mb-4">
+        <button
+          className="btn btn-primary"
+          onClick={() => setShowForm(!showForm)}
+        >
+          {showForm ? "Close Form" : "Add Tool"}
+        </button>
+      </div>
 
       {showForm && <ToolForm onAddTool={handleAddTool} />}
 
-      <div className="tools-list">
+      <div className="row justify-content-center">
         {tools.map((tool) => (
-          <ToolCard key={tool.id} tool={tool} />
+          <div className="col-md-4 mb-4" key={tool.id}>
+            <ToolCard tool={tool} />
+          </div>
         ))}
       </div>
     </div>
