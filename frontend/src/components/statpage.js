@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react"
 
 const Stats = () => {
-  const [stats, setStats] = useState(null)
+  // const [stats, setStats] = useState(null)
 
-  useEffect(() => {
-    fetch("http://localhost:9292/stats")
-      .then((response) => response.json())
-      .then((statData) => setStats(statData))
-  }, [])
+  // useEffect(() => {
+  //   fetch("http://localhost:9292/stats")
+  //     .then((response) => response.json())
+  //     .then((data) => setStats(data))
+  // }, [])
 
-  if (!stats) return <div>Loading....</div>
+  // if (!stats) return <div>Loading...</div>
 
   return (
     <div>
@@ -17,7 +17,7 @@ const Stats = () => {
       <div>
         <h2>Customer Stats</h2>
         <p>Total Customers: {stats.customers.total_customers}</p>
-        <p>Outstanding Balance: ${stats.customers.total_amount_owed}</p>
+        <p>Total Amount Owed: ${stats.customers.total_amount_owed}</p>
         <p>Average Customer Cost: ${stats.customers.average_customer_cost}</p>
         <h3>Favorite Customers</h3>
         <ul>
@@ -28,10 +28,10 @@ const Stats = () => {
       </div>
       <div>
         <h2>Rental Stats</h2>
-        <p>Total Rentals: {stats.rentals.total_rentals}</p>
+        {/* <p>Total Rentals: {stats.rentals.total_rentals}</p>
         <p>Open Rentals: {stats.rentals.open_rentals}</p>
-        <p>Average Rental Duration: {stats.rentals.average_rental_length}</p>
-        <h3>Most Popular Tool: {stats.rentals.most_popular_tool}</h3>
+        <p>Average Rental Length: {stats.rentals.average_rental_length} days</p>
+        <p>Most Popular Tool: {stats.rentals.most_popular_tool}</p> */}
       </div>
     </div>
   )
