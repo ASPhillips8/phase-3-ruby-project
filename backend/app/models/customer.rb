@@ -6,10 +6,23 @@ class Customer < ActiveRecord::Base
     "#{first_name} #{last_name}"
   end
 
-  # def amount_owed
-  #   rentals.sum do |rental|
-  #     rental_end_date = rental.date_in
-  #     (rental_end_date - rental.date_out).to_i * rental.tool.price_per_day
-  #   end
-  # end
+  def total_rentals_cost
+    rentals.where.not(date_in: nil).sum(&:rental_cost)
+  end
+
+  def add_amount_owed
+    update(current_amount_owed: current_amount_owed + total_rentals_cost)
+  end
+
+  def self.total_owed
+    sum(:current_amount_owed).round(2)
+  end
+
+  def self.average_customer_cost
+    average(:current_amount_owed).to_f.round(2)
+  end
+
+  def self.favorite_customers
+    joins(:rentals).group("customers.id").order("COUNT(rentals.id) DESC").limit(2)
+  end
 end

@@ -3,6 +3,7 @@ import ToolsList from "./pages/ToolsList"
 import Customers from "./pages/Customers"
 import Rental from "./pages/Rental"
 import Home from "./pages/Home"
+import Stats from "./pages/Stats"
 
 const routes = [
   {
@@ -24,6 +25,10 @@ const routes = [
       {
         path: "rentals",
         element: <Rental />,
+      },
+      {
+        path: "stats",
+        element: <Stats />,
       },
     ],
   },

@@ -31,7 +31,6 @@ const Rental = () => {
     })
       .then((response) => response.json())
       .then((savedRental) => {
-        console.log(savedRental)
         setRentals((prevRentals) => [...prevRentals, savedRental])
         setTools((prevTools) =>
           prevTools.filter((tool) => tool.id !== savedRental.tool.id)
@@ -58,6 +57,7 @@ const Rental = () => {
             rental.id === updatedRental.id ? updatedRental : rental
           )
         )
+        setTools((prevTools) => [...prevTools, updatedRental.tool])
         setEditFormVisible(false)
         setCurrentRental(null)
       })
@@ -88,14 +88,20 @@ const Rental = () => {
   }
 
   const handleEditClick = (rental) => {
+    setFormVisible(false)
     setCurrentRental(rental)
     setEditFormVisible(true)
+  }
+
+  const handleAddRentalClick = () => {
+    setEditFormVisible(false)
+    setFormVisible(true)
   }
 
   return (
     <div>
       <h1>Current Rentals</h1>
-      <button onClick={() => setFormVisible(true)}>Add Rental</button>
+      <button onClick={handleAddRentalClick}>Add Rental</button>
       {isFormVisible && (
         <RentalForm
           onSave={handleSave}

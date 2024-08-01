@@ -116,20 +116,41 @@ class ApplicationController < Sinatra::Base
       date_out: params[:date_out],
       date_in: params[:date_in]
     )
+
+    tool = Tool.find(rental.tool_id)
+    tool.return_back
+
+    customer = rental.customer
+    customer.add_amount_owed
+
     rental.to_json(include: {
                      customer: { methods: :full_name,
                                  only: %i[id first_name
-                                          last_name], }, tool: { methods: :rent, only: %i[id name] },
+                                          last_name], }, tool: { methods: :return_back, only: %i[id name] },
                    })
-    # customer = rental.customer
-    # customer.update(current_amount_owed: customer.amount_owed) if rental.date_in
-
-    # rental.to_json(include: :customer)
   end
 
   delete "/rentals/:id" do
     rental = Rental.find(params[:id])
     rental.destroy
     rental.to_json
+  end
+
+  get "/stats" do
+    stats = {
+      customers: {
+        total_customers: Customer.count,
+        total_amount_owed: Customer.total_owed,
+        average_customer_cost: Customer.average_customer_cost,
+        favorite_customers: Customer.favorite_customers.map(&:full_name),
+      },
+      rentals: {
+        total_rentals: Rental.count,
+        open_rentals: Rental.open_rentals,
+        average_rental_length: Rental.average_rental_length,
+        most_popular_tool: Rental.most_popular_tool,
+      },
+    }
+    stats.to_json
   end
 end

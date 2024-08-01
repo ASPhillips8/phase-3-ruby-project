@@ -14,6 +14,9 @@ function NavBar() {
       <NavLink to="/rentals" className="navbar">
         Rentals
       </NavLink>
+      <NavLink to="/stats" className="navbar">
+        Stats
+      </NavLink>
     </nav>
   )
 }
