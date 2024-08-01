@@ -135,4 +135,22 @@ class ApplicationController < Sinatra::Base
     rental.destroy
     rental.to_json
   end
+
+  get "/stats" do
+    stats = {
+      customers: {
+        total_customers: Customer.count,
+        total_amount_owed: Customer.total_owed,
+        average_customer_cost: Customer.average_customer_cost,
+        favorite_customers: Customer.favorite_customers.map(&:full_name),
+      },
+      rentals: {
+        total_rentals: Rental.count,
+        open_rentals: Rental.open_rentals,
+        average_rental_length: Rental.average_rental_length,
+        most_popular_tool: Rental.most_popular_tool,
+      },
+    }
+    stats.to_json
+  end
 end
