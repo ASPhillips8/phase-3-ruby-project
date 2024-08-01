@@ -15,11 +15,11 @@ class Customer < ActiveRecord::Base
   end
 
   def self.total_owed
-    sum(:current_amount_owed)
+    sum(:current_amount_owed).round(2)
   end
 
   def self.average_customer_cost
-    average(:current_amount_owed)
+    average(:current_amount_owed).to_f.round(2)
   end
 
   def self.favorite_customers
