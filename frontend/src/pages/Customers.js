@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
 import CustomerForm from "../components/CustomerForm"
 import CustomerTable from "../components/CustomerTable"
+import "bootstrap/dist/css/bootstrap.min.css"
 
 const Customers = () => {
   const [customers, setCustomers] = useState([])
@@ -69,9 +70,16 @@ const Customers = () => {
   }
 
   return (
-    <div>
-      <h1>Customer List</h1>
-      <button onClick={() => setFormVisible(true)}>Add Customer</button>
+    <div className="container mt-4">
+      <div className="d-flex justify-content-between align-items-center mb-4">
+        <h1 className="text-center w-100">Customer List</h1>
+        <button
+          className="btn btn-primary"
+          onClick={() => setFormVisible(true)}
+        >
+          Add Customer
+        </button>
+      </div>
       {isFormVisible && (
         <CustomerForm
           customer={currentCustomer}

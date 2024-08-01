@@ -1,16 +1,17 @@
 import React from "react"
+import "bootstrap/dist/css/bootstrap.min.css"
 
 const CustomerTable = ({ customers, onEdit, onDelete }) => {
   return (
-    <table>
+    <table className="table table-striped">
       <thead>
         <tr>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th>Age</th>
-          <th>Phone Number</th>
-          <th>Email Address</th>
-          <th>Actions</th>
+          <th className="table-header">First Name</th>
+          <th className="table-header">Last Name</th>
+          <th className="table-header">Age</th>
+          <th className="table-header">Phone Number</th>
+          <th className="table-header">Email Address</th>
+          <th className="table-header">Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -22,8 +23,18 @@ const CustomerTable = ({ customers, onEdit, onDelete }) => {
             <td>{customer.phone_number}</td>
             <td>{customer.email_address}</td>
             <td>
-              <button onClick={() => onEdit(customer)}>Edit</button>
-              <button onClick={() => onDelete(customer.id)}>Delete</button>
+              <button
+                className="btn btn-warning mr-2"
+                onClick={() => onEdit(customer)}
+              >
+                Edit
+              </button>
+              <button
+                className="btn btn-danger"
+                onClick={() => onDelete(customer.id)}
+              >
+                Delete
+              </button>
             </td>
           </tr>
         ))}
