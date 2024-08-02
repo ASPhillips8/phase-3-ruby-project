@@ -48,8 +48,8 @@ The Tool Rental Application is a web-based management system developed using Rea
 The focus of this project is **building a Sinatra API backend** that uses
 **Active Record** to access and persist data in a database, which will be used
 by a separate **React frontend** that interacts with the database via the API.
-## Relationships
-![Screenshot 2024-08-02 at 8 38 52 AM](https://github.com/user-attachments/assets/f491601f-9d19-4e7d-a840-a4e173c64456)
+
+![Rubyprojectdemo-ezgif com-video-to-gif-converter](https://github.com/user-attachments/assets/8a67c33e-a066-4512-8c25-140888c479ef)
 
 
 ## Usage
@@ -82,6 +82,9 @@ by a separate **React frontend** that interacts with the database via the API.
   - Open rentals
   - Average rental duration
   - The most popular tool
+
+## Relationships
+![Screenshot 2024-08-02 at 8 38 52 AM](https://github.com/user-attachments/assets/f491601f-9d19-4e7d-a840-a4e173c64456)
 
 ## Features
 
