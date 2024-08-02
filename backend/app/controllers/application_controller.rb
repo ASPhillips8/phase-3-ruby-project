@@ -28,7 +28,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/customers" do
-    customers = Customer.all.inculdes(:rentals).all
+    customers = Customer.includes(:rentals).all
     customers.to_json(include: { rentals: { only: [:id] } })
   end
 
@@ -41,7 +41,7 @@ class ApplicationController < Sinatra::Base
       email_address: params[:email_address],
       current_amount_owed: params[:current_amount_owed] || 0.0
     )
-    customer.reload
+    customer.reload # Reload to ensure associations are included
     customer.to_json(include: { rentals: { only: [:id] } })
   end
 
@@ -55,7 +55,7 @@ class ApplicationController < Sinatra::Base
       email_address: params[:email_address],
       current_amount_owed: params[:current_amount_owed]
     )
-    customer.reload
+    customer.reload # Ensure the updated customer object includes associations
     customer.to_json(include: { rentals: { only: [:id] } })
   end
 
