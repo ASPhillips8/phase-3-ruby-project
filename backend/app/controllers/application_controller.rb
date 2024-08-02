@@ -16,11 +16,6 @@ class ApplicationController < Sinatra::Base
     tools.to_json
   end
 
-  get "/tools/:id" do
-    tool = Tool.find(params[:id])
-    tool.to_json
-  end
-
   post "/tools" do
     tool = Tool.create(
       name: params[:name],
@@ -32,15 +27,9 @@ class ApplicationController < Sinatra::Base
     tool.to_json
   end
 
-  # customer controllers
   get "/customers" do
     customers = Customer.all
     customers.to_json(include: :rentals)
-  end
-
-  get "/customers/:id" do
-    customers = Customer.find(params[:id])
-    customers.to_json
   end
 
   post "/customers" do
@@ -74,8 +63,6 @@ class ApplicationController < Sinatra::Base
     customer.to_json
   end
 
-  # renteral controllers
-
   get "/rentals" do
     rentals = Rental.all.to_json(include: {
                                    customer: { methods: :full_name,
@@ -87,11 +74,6 @@ class ApplicationController < Sinatra::Base
     { rentals: JSON.parse(rentals),
       customers: customers,
       tools: tools, }.to_json
-  end
-
-  get "/rentals/:id" do
-    rental = Rental.find(params[:id])
-    rental.to_json
   end
 
   post "/rentals/new" do
