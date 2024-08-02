@@ -145,9 +145,9 @@ by a separate **React frontend** that interacts with the database via the API.
 - Add a tool accessory.
    - Accessory would belong to a tool (one to many association)
    - Accessory could be rented without tool at different price
-- Add logic to not allow deletion of Customers if rental is active
+- Add logic to save rental history and allow for customer delete if customer balance is zero and tool returned
 - Customer payment feature that updates amount owed
-- Scheduled Reservations for tool rentals that updates availability based on estimate rental duration
+- Scheduled Reservations for tool rentals that updates availability based on estimated rental duration
 - Multiple tool selection for single rental
 - Improve the UI/UX with advanced styling and responsive design.
 
