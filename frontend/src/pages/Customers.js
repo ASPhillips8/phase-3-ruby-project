@@ -7,11 +7,13 @@ const Customers = () => {
   const [customers, setCustomers] = useState([])
   const [isFormVisible, setFormVisible] = useState(false)
   const [currentCustomer, setCurrentCustomer] = useState(null)
+  const [errorMessage, setErrorMessage] = useState("")
 
   useEffect(() => {
     fetch("http://localhost:9292/customers")
       .then((response) => response.json())
       .then((customerData) => setCustomers(customerData))
+      .catch(() => setErrorMessage("There was an error feting customer data"))
   }, [])
 
   const handleDelete = (id) => {
@@ -19,13 +21,18 @@ const Customers = () => {
       method: "DELETE",
     })
       .then((response) => response.json())
-      .then(() => {
-        setCustomers((prevCustomers) =>
-          prevCustomers.filter((customer) => customer.id !== id)
-        )
+      .then((deleteData) => {
+        if (deleteData.error) {
+          setErrorMessage(deleteData.error)
+        } else {
+          setCustomers((prevCustomers) =>
+            prevCustomers.filter((customer) => customer.id !== id)
+          )
+          setErrorMessage("")
+        }
       })
-      .catch((error) =>
-        console.error("There was an error deleting the customer!", error)
+      .catch(() =>
+        setErrorMessage("Can Not Delete Customer if they have a rental")
       )
   }
 
@@ -54,9 +61,7 @@ const Customers = () => {
         setFormVisible(false)
         setCurrentCustomer(null)
       })
-      .catch((error) =>
-        console.error("There was an error saving the customer!", error)
-      )
+      .catch(() => setErrorMessage("There was an issue saving the customer"))
   }
 
   const handleEdit = (customer) => {
@@ -71,6 +76,7 @@ const Customers = () => {
 
   return (
     <div className="container mt-4">
+      {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
       <div className="d-flex justify-content-between align-items-center mb-4">
         <h1 className="text-center w-100">Customer List</h1>
         <button
