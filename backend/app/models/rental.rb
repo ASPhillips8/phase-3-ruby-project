@@ -27,6 +27,6 @@ class Rental < ActiveRecord::Base
   def self.average_rental_length
     completed_rentals = where.not(date_in: nil)
     total_days = completed_rentals.sum(&:rental_time)
-    completed_rentals.any? ? (total_days / completed_rentals.size.to_f) : 0.0
+    completed_rentals.any? ? (total_days / completed_rentals.size.to_f).round(2) : 0.0
   end
 end

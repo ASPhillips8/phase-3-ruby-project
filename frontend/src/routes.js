@@ -2,7 +2,6 @@ import App from "./App"
 import ToolsList from "./pages/ToolsList"
 import Customers from "./pages/Customers"
 import Rental from "./pages/Rental"
-import Home from "./pages/Home"
 import Stats from "./pages/Stats"
 
 const routes = [
@@ -12,10 +11,6 @@ const routes = [
     children: [
       {
         path: "/",
-        element: <Home />,
-      },
-      {
-        path: "tools",
         element: <ToolsList />,
       },
       {

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react"
 import RentalTable from "../components/RentalTable"
 import RentalForm from "../components/RentalForm"
 import EditRentalForm from "../components/EditRentalForm"
+import "bootstrap/dist/css/bootstrap.min.css"
 
 const Rental = () => {
   const [rentals, setRentals] = useState([])
@@ -99,9 +100,13 @@ const Rental = () => {
   }
 
   return (
-    <div>
-      <h1>Current Rentals</h1>
-      <button onClick={handleAddRentalClick}>Add Rental</button>
+    <div className="container mt-4">
+      <div className="d-flex justify-content-between align-items-center mb-4">
+        <h1 className="text-center w-100">Current Rentals</h1>
+        <button className="btn btn-primary" onClick={handleAddRentalClick}>
+          Add Rental
+        </button>
+      </div>
       {isFormVisible && (
         <RentalForm
           onSave={handleSave}

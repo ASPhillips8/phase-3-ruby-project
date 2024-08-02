@@ -1,0 +1,9 @@
+.nav-link {
+  text-align: center;
+  width: auto;
+}
+
+.nav-link.active {
+  background-color: #007bff;
+  color: white !important;
+}

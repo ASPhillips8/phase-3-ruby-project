@@ -1,14 +1,16 @@
 import React from "react"
+import "bootstrap/dist/css/bootstrap.min.css"
 
 const RentalTable = ({ rentals, onUpdate, onDelete }) => {
   return (
-    <table>
+    <table className="table table-striped">
       <thead>
         <tr>
-          <th>Tool</th>
-          <th>Customer</th>
-          {/* <th>Amount Owed</th> */}
-          <th>Actions</th>
+          <th className="table-header">Tool</th>
+          <th className="table-header">Customer</th>
+          <th className="table-header">Date Out</th>
+          <th className="table-header">Date Returned</th>
+          <th className="table-header">Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -20,9 +22,21 @@ const RentalTable = ({ rentals, onUpdate, onDelete }) => {
             <td>
               {rental.customer_id} - {rental.customer.full_name}
             </td>
+            <td>{rental.date_out}</td>
+            <td>{rental.date_in}</td>
             <td>
-              <button onClick={() => onUpdate(rental)}>Edit</button>
-              <button onClick={() => onDelete(rental.id)}>Delete</button>
+              <button
+                className="btn btn-warning mr-2"
+                onClick={() => onUpdate(rental)}
+              >
+                Edit
+              </button>
+              <button
+                className="btn btn-danger"
+                onClick={() => onDelete(rental.id)}
+              >
+                Delete
+              </button>
             </td>
           </tr>
         ))}

@@ -50,7 +50,7 @@ const Stats = () => {
             </p>
             <p>
               <strong>Average Rental Duration:</strong>{" "}
-              {stats.rentals.average_rental_length}
+              {stats.rentals.average_rental_length} Days
             </p>
             <h3>Most Popular Tool:</h3>
             <p>{stats.rentals.most_popular_tool}</p>
