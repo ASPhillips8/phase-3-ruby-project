@@ -2,9 +2,10 @@ class Tool < ActiveRecord::Base
   has_many :rentals
   has_many :customers, through: :rentals
 
-  def self.available
-    all.where(availability: true)
-  end
+  scope :availble, -> { where(availability: true) }
+  # def self.available
+  #   where(availability: true)
+  # end
 
   def rent
     update(availability: false)

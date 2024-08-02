@@ -28,8 +28,8 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/customers" do
-    customers = Customer.all
-    customers.to_json(include: :rentals)
+    customers = Customer.all.inculdes(:rentals).all
+    customers.to_json(include: { rentals: { only: [:id] } })
   end
 
   post "/customers" do
@@ -41,7 +41,8 @@ class ApplicationController < Sinatra::Base
       email_address: params[:email_address],
       current_amount_owed: params[:current_amount_owed] || 0.0
     )
-    customer.to_json
+    customer.reload
+    customer.to_json(include: { rentals: { only: [:id] } })
   end
 
   patch "/customers/:id" do
@@ -54,7 +55,8 @@ class ApplicationController < Sinatra::Base
       email_address: params[:email_address],
       current_amount_owed: params[:current_amount_owed]
     )
-    customer.to_json
+    customer.reload
+    customer.to_json(include: { rentals: { only: [:id] } })
   end
 
   delete "/customers/:id" do
