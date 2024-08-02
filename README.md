@@ -58,7 +58,6 @@ by a separate **React frontend** that interacts with the database via the API.
 
 - View the list of tools with options to sort by name, availability, or category.
 - Add new tools to the inventory.
-- Update the availability status of tools when rented or returned.
 
 2. Customer Management
 
@@ -69,7 +68,8 @@ by a separate **React frontend** that interacts with the database via the API.
 
 - View the list of all rentals with details of associated customers and tools.
 - Create new rental records by selecting a customer, tool, and rental dates.
-- Update or delete existing rentals.
+- Update the availability status of tools when rented or returned.
+- Update rental period or delete existing rentals.
 
 4. Statistics
 
@@ -92,7 +92,6 @@ by a separate **React frontend** that interacts with the database via the API.
 
   - Display a list of tools with sorting options.
   - Add new tools to the inventory.
-  - Mark tools as rented or returned.
 
 - **Customer Management**
 
@@ -103,6 +102,7 @@ by a separate **React frontend** that interacts with the database via the API.
 
   - Display a list of rentals with customer and tool details.
   - Create, update, or delete rental records.
+    - update tool availablity and amount customer owes on Rentals Create and Update
 
 - **Statistics**
   - View key business metrics and statistics.
@@ -139,16 +139,17 @@ by a separate **React frontend** that interacts with the database via the API.
 
 ## Future Enhancements
 
-• Create route to individual tool to display more details and allow for delete and edit
-•• Tool could be sold to customer
-
-• Add filtering options for customer and rentals
-• Add a tool accessory. Accessory would belong to a tool (association)
-• Add logic to not allow deletion of Customers if rental is active
-• Paid Balance Update that updates amount owed upon payment.
-• Scheduled Reservations for tool rentals that updates availability based of estimate rental duration
-• Multiple tool selection for single rental
-• Improve the UI/UX with advanced styling and responsive design.
+- Create route to individual tool to display more details and allow for delete and edit
+   - Tool could be sold to customer
+- Add filtering options for customer and rentals
+- Add a tool accessory.
+   - Accessory would belong to a tool (one to many association)
+   - Accessory could be rented without tool at different price
+- Add logic to not allow deletion of Customers if rental is active
+- Customer payment feature that updates amount owed
+- Scheduled Reservations for tool rentals that updates availability based on estimate rental duration
+- Multiple tool selection for single rental
+- Improve the UI/UX with advanced styling and responsive design.
 
 ## Credits
 
