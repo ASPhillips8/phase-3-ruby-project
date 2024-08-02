@@ -10,28 +10,28 @@ function NavBar() {
         <NavLink
           to="/"
           className="nav-link btn btn-outline-primary rounded-pill mx-2"
-          activeClassName="active"
+          activeclassname="active"
         >
           Tools
         </NavLink>
         <NavLink
           to="/customers"
           className="nav-link btn btn-outline-primary rounded-pill mx-2"
-          activeClassName="active"
+          activeclassname="active"
         >
           Customers
         </NavLink>
         <NavLink
           to="/rentals"
           className="nav-link btn btn-outline-primary rounded-pill mx-2"
-          activeClassName="active"
+          activeclassname="active"
         >
           Rentals
         </NavLink>
         <NavLink
           to="/stats"
           className="nav-link btn btn-outline-primary rounded-pill mx-2"
-          activeClassName="active"
+          activeclassname="active"
         >
           Stats
         </NavLink>
