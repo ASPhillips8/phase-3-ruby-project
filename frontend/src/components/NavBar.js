@@ -8,7 +8,7 @@ function NavBar() {
     <nav className="navbar navbar-expand-lg navbar-light bg-light justify-content-center">
       <div className="navbar-nav">
         <NavLink
-          to="/tools"
+          to="/"
           className="nav-link btn btn-outline-primary rounded-pill mx-2"
           activeClassName="active"
         >
