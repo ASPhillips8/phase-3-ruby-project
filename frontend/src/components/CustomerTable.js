@@ -11,6 +11,7 @@ const CustomerTable = ({ customers, onEdit, onDelete }) => {
           <th className="table-header">Age</th>
           <th className="table-header">Phone Number</th>
           <th className="table-header">Email Address</th>
+          <th className="table-header">Amount Owed</th>
           <th className="table-header">Actions</th>
         </tr>
       </thead>
@@ -22,6 +23,7 @@ const CustomerTable = ({ customers, onEdit, onDelete }) => {
             <td>{customer.age}</td>
             <td>{customer.phone_number}</td>
             <td>{customer.email_address}</td>
+            <td>{customer.current_amount_owed}</td>
             <td>
               <button
                 className="btn btn-warning mr-2"
