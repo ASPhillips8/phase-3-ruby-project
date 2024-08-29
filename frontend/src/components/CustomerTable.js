@@ -31,12 +31,18 @@ const CustomerTable = ({ customers, onEdit, onDelete }) => {
               >
                 Edit
               </button>
-              <button
-                className="btn btn-danger"
-                onClick={() => onDelete(customer.id)}
-              >
-                Delete
-              </button>
+              {customer.rentals.length === 0 ? (
+                <button
+                  className="btn btn-danger ml-2"
+                  onClick={() => onDelete(customer.id)}
+                >
+                  Delete
+                </button>
+              ) : (
+                <span className="text-danger ml-2">
+                  Cannot delete; has active rentals
+                </span>
+              )}
             </td>
           </tr>
         ))}
