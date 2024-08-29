@@ -9,7 +9,6 @@ RSpec.describe Tool, type: :model do
     )
   end
 
-  # Full setup for checking attributes and associations
   let(:tool) do
     Tool.create(
       name: "Hammer",
